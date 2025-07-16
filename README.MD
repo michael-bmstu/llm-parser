@@ -1,3 +1,3 @@
 # LLM tabel parser
 
-## P
+## Project struct
