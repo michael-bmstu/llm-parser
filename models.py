@@ -12,8 +12,3 @@ class IFRS(BaseModel):
     comprehensive_income: Optional[str] = Field(None, description="Description of comprehensive income components.")
     segment_reporting: Optional[str] = Field(None, description="Details on segment reporting requirements.")
     fair_value_measurement: Optional[str] = Field(None, description="Explanation of fair value measurement techniques.")
-
-# Example usage with PydanticOutputParser
-from langchain_core.output_parsers import PydanticOutputParser
-
-ifrs_parser = PydanticOutputParser(pydantic_object=IFRS)

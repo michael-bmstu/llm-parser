@@ -2,7 +2,10 @@
 The annual IFRS reporting of issuers differs from each other in format, therefore, for the convenience of extracting key indicators, a special parser is required.
 
 ## Project struct
-- `parsing.ipynb` : extract tables from pdf (develop)
+- `research.ipynb` : testing pdf parsing functional
+- `utils.py` : auxiliary functions
+- `models.py` : Pydantic models for PydanticOutputParser
+- `parser.py` : llm parser implementation
 
 <details>
 <summary style="font-size: 20px;"><b>Key Indicators of IFRS Financial Reporting that will be parsed</b></summary>
