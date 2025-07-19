@@ -1,14 +1,18 @@
-# LLM tabel parser
-The annual IFRS reporting of issuers differs from each other in format, therefore, for the convenience of extracting key indicators, a special parser is required.
+# LLM IFRS financial statements parser
+The annual IFRS financial statements of issuers differs from each other in format, therefore, for the convenience of extracting key indicators, a special parser is required.
 
 ## Project struct
 - `research.ipynb` : testing pdf parsing functional
-- `utils.py` : auxiliary functions
-- `models.py` : Pydantic models for PydanticOutputParser
-- `parser.py` : llm parser implementation
+- `main.py` : FastAPI application run file
+- **`app`** : Application's modules
+    - `utils.py` : Parsing functions
+    - `models.py` : Pydantic models for PydanticOutputParser
+    - `logger.py` :
+    - `interface.py` : Gradio interface
+- `requirements.txt`
 
 <details>
-<summary style="font-size: 20px;"><b>Key Indicators of IFRS Financial Reporting that will be parsed</b></summary>
+<summary style="font-size: 20px;"><b>Key Indicators of IFRS financial reporting that will be parsed</b></summary>
 
 Financial reporting under International Financial Reporting Standards (IFRS) includes several key indicators that help assess a company's financial position and performance. Here are the main ones:
 
