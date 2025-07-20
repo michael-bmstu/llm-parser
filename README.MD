@@ -7,7 +7,7 @@ The annual IFRS financial statements of issuers differs from each other in forma
 - **`app`** : Application's modules
     - `utils.py` : Parsing functions
     - `models.py` : Pydantic models for PydanticOutputParser
-    - `logger.py` :
+    - `logger.py` : creating logger
     - `interface.py` : Gradio interface
 - `requirements.txt`
 
@@ -51,7 +51,18 @@ Cash flows refer to the movement of cash into and out of a business. Under IFRS,
 
 ### Conclusion
 These IFRS indicators provide valuable insights into a company's financial performance and position. They are essential for investors, analysts, and stakeholders to make informed decisions regarding the company's operations and future prospects. Understanding these metrics can help in evaluating a company's profitability, liquidity, and financial stability.
-
-
-These indicators help investors, analysts, and other stakeholders make informed decisions based on the company's financial reporting.
 </details>
+
+
+## Run instructions
+1. Install requirements.txt `pip install -r requirements.txt`
+2. For using tablula-py lib install java
+    - Ubuntu: `sudo apt install default-jdk`
+    - Windows: install from [OpenJDK website](https://jdk.java.net/)
+3. Run application (run in project directory)
+    - FastAPI: `fastapi run main.py`
+    - Uvicorn: `uvicorn main:app`
+
+## Application operation example
+
+///
