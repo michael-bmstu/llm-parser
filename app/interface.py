@@ -3,39 +3,72 @@ import pandas as pd
 try:
     import utils
     from config import mistral_params
+    from logger import setup_logger
 except:
     from . import utils
     from .config import mistral_params
+    from .logger import setup_logger
+
+logger = setup_logger()
 
 
 def show_outputs():
+    logger.info("Processing done")
     return gr.update(visible=True), gr.update(visible=True), \
         gr.update(visible=True), gr.update(visible=True)
 
 def hide_outputs():
+    logger.debug("File was closed")
     return gr.update(value=pd.DataFrame(), visible=False), gr.update(visible=False), \
         gr.update(visible=False), gr.update(visible=False), gr.update(visible=False)
 
 def parse_pdf(file):
-    tables_txt = utils.extract_tabels(file)
-    llm = utils.create_model(mistral_params)
-    parsed_dict = utils.process_txt(tables_txt, llm)
-    print(parsed_dict)
-    # df = pd.Series(parsed_dict).to_frame()
-    df = pd.DataFrame(list(parsed_dict.items()), columns=['Indicator', 'Value'])
+    """
+    This function extracts tables from a given PDF file, processes the text
+    using a language model, and saves the results into CSV, Excel, and JSON
+    formats.
 
-    if file is not None:
-        fn = file.name.split(".")[0]
-    path_ext = lambda ext: f"{fn}_parsed.{ext}"
-    csv_path = path_ext("csv")
-    xlsx_path = path_ext("xlsx")
-    json_path = path_ext("json")
+    Args:
+        file (file-like object): The PDF file to be parsed.
+
+    Returns:
+        tuple: A tuple containing:
+            - pd.DataFrame: A DataFrame with the parsed indicators and values.
+            - str: The name of CSV file.
+            - str: The name of Excel file.
+            - str: The name of JSON file.
+
+    Raises:
+        Exception: If an error occurs during the parsing process.
+    """
+    logger.info("Starting to parse PDF file: %s", file.name)
     
-    df.to_csv(csv_path, index=False)
-    df.to_excel(xlsx_path, index=False)
-    df.to_json(json_path, index=False)
-  
+    try:
+        tables_txt = utils.extract_tabels(file)
+        logger.debug("Extracted tables text")
+
+        llm = utils.create_model(mistral_params)
+        logger.debug("Model created successfully.")
+
+        parsed_dict = utils.process_txt(tables_txt, llm)
+        logger.debug("Parsed dictionary: %s", parsed_dict)
+
+        fn = file.name.split(".")[0]
+        path_ext = lambda ext: f"{fn}_parsed.{ext}"
+        csv_path = path_ext("csv")
+        xlsx_path = path_ext("xlsx")
+        json_path = path_ext("json")
+
+        df = pd.DataFrame(list(parsed_dict.items()), columns=['Indicator', 'Value'])
+        df.to_csv(csv_path, index=False)
+        df.to_excel(xlsx_path, index=False)
+        df.to_json(json_path, index=False)
+
+    except Exception as e:
+        logger.error("An error occurred while parsing the PDF: %s", e)
+        raise e
     return df, csv_path, xlsx_path, json_path
+
 
 def create_interface(title: str = "gradio app"):
     interface = gr.Blocks(title=title)
