@@ -1,7 +1,10 @@
 from tabula import read_pdf
 import os
 from langchain_mistralai import ChatMistralAI
-from models import IFRS
+try:
+    from models import IFRS
+except:
+    from .models import IFRS
 
 
 def extract_tabels(file) -> str:

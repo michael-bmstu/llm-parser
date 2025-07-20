@@ -1,7 +1,11 @@
 import gradio as gr
 import pandas as pd
-import utils
-from config import mistral_params
+try:
+    import utils
+    from config import mistral_params
+except:
+    from . import utils
+    from .config import mistral_params
 
 
 def show_outputs():
@@ -16,7 +20,9 @@ def parse_pdf(file):
     tables_txt = utils.extract_tabels(file)
     llm = utils.create_model(mistral_params)
     parsed_dict = utils.process_txt(tables_txt, llm)
-    df = pd.DataFrame(parsed_dict)
+    print(parsed_dict)
+    # df = pd.Series(parsed_dict).to_frame()
+    df = pd.DataFrame(list(parsed_dict.items()), columns=['Indicator', 'Value'])
 
     if file is not None:
         fn = file.name.split(".")[0]
