@@ -4,11 +4,11 @@ from langchain_mistralai import ChatMistralAI
 from models import IFRS
 
 
-def extract_tabels(file_path: str) -> str:
+def extract_tabels(file) -> str:
     """
     Extract tables from .pdf file and convert them to string
     """
-    tables = read_pdf(file_path, pages="all")
+    tables = read_pdf(file, pages="all")
     os.system('clear')
     for i, t in enumerate(tables):
         tables[i] = t.dropna(how='all').dropna(axis=1, how='all')
@@ -29,11 +29,10 @@ def create_model(params: dict[str, str]) -> ChatMistralAI:
     )
     return llm.with_structured_output(IFRS)
 
-def process_pdf(file_path: str, llm_parser: ChatMistralAI) -> dict[str, float]:
-    parsed_tabels_txt = extract_tabels(file_path)
+def process_txt(tables_txt: str, llm_parser: ChatMistralAI) -> dict[str, float]:
     messages = [
     ("system", "You are an experienced financial analyst, process the IFRS reports"),
-    ("human", parsed_tabels_txt)
+    ("human", tables_txt)
     ]
     answer = llm_parser.invoke(messages)
     return answer.model_dump()

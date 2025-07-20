@@ -1,8 +1,8 @@
 import gradio as gr
 import pandas as pd
+import utils
+from config import mistral_params
 
-def load_file():
-    return gr.update(visible=True)
 
 def show_outputs():
     return gr.update(visible=True), gr.update(visible=True), \
@@ -13,14 +13,14 @@ def hide_outputs():
         gr.update(visible=False), gr.update(visible=False), gr.update(visible=False)
 
 def parse_pdf(file):
-    data = {
-        'StringColumn': ['Row1', 'Row2', 'Row3', 'Row4', 'Row5'],
-        'FloatColumn': [1.1, 2.2, 3.3, 4.4, 5.5]
-    }
-    df = pd.DataFrame(data)
+    tables_txt = utils.extract_tabels(file)
+    llm = utils.create_model(mistral_params)
+    parsed_dict = utils.process_txt(tables_txt, llm)
+    df = pd.DataFrame(parsed_dict)
+
     if file is not None:
         fn = file.name.split(".")[0]
-    path_ext = lambda ext: f"{fn}_parsed.{ext}" 
+    path_ext = lambda ext: f"{fn}_parsed.{ext}"
     csv_path = path_ext("csv")
     xlsx_path = path_ext("xlsx")
     json_path = path_ext("json")
@@ -46,7 +46,7 @@ def create_interface(title: str = "gradio app"):
             download_json = gr.File(label="Download as JSON", visible=False)
 
 
-        pdf_input.upload(load_file, None, process_btn)
+        pdf_input.upload(lambda: gr.update(visible=True), None, process_btn)
         process_btn.click(parse_pdf, [pdf_input], 
                          [parsed_reports, download_csv, download_xlsx, download_json], queue=True)
         process_btn.click(show_outputs, None, [parsed_reports, download_csv, download_xlsx, download_json], queue=True)
