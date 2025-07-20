@@ -1,10 +1,10 @@
 import gradio as gr
 import pandas as pd
-try:
+try:    # for running interface.py
     import utils
     from config import mistral_params
     from logger import setup_logger
-except:
+except: # for running main.py
     from . import utils
     from .config import mistral_params
     from .logger import setup_logger

@@ -1,11 +1,10 @@
 from tabula import read_pdf
-import os
 from langchain_mistralai import ChatMistralAI
-try:
-    from models import IFRS
+try:    # for running interface.py
+    from app.model import IFRS
     from logger import setup_logger
-except:
-    from .models import IFRS
+except: # for running main.py
+    from .model import IFRS
     from .logger import setup_logger
 
 logger = setup_logger()

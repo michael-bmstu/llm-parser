@@ -1,6 +1,6 @@
 import logging
 
-def setup_logger(level=logging.INFO) -> logging.Logger:
+def setup_logger(level=logging.DEBUG) -> logging.Logger:
     """Set up a logger with the specified name and log file.
 
     Args:
@@ -15,7 +15,7 @@ def setup_logger(level=logging.INFO) -> logging.Logger:
     logger.setLevel(level)
 
     # Create a file handler
-    file_handler = logging.FileHandler(log_file, mode="w+")
+    file_handler = logging.FileHandler(log_file, mode="w")
     file_handler.setLevel(level)
 
     # Create a console handler
@@ -30,8 +30,9 @@ def setup_logger(level=logging.INFO) -> logging.Logger:
     console_handler.setFormatter(formatter)
 
     # Add the handlers to the logger
-    logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
+    if not logger.handlers:
+        logger.addHandler(file_handler)
+        logger.addHandler(console_handler)
 
     return logger
 
