@@ -9,6 +9,8 @@ The annual IFRS financial statements of issuers differs from each other in forma
     - `models.py` : Pydantic models for PydanticOutputParser
     - `logger.py` : creating logger
     - `interface.py` : Gradio interface
+- **`data`** : examples of IFRS financial reporting
+- **`media`**
 - `requirements.txt`
 
 <details>
@@ -55,6 +57,7 @@ These IFRS indicators provide valuable insights into a company's financial perfo
 
 
 ## Run instructions
+0. Create venv in project directory `python3 -m venv venv`
 1. Install requirements.txt `pip install -r requirements.txt`
 2. For using tablula-py lib install java
     - Ubuntu: `sudo apt install default-jdk`
@@ -63,7 +66,23 @@ These IFRS indicators provide valuable insights into a company's financial perfo
     - FastAPI: `fastapi run main.py`
     - Uvicorn: `uvicorn main:app`
 
-## Application operation example
 
-Processing tesla financial statements
+## Implemented functionality
+1. Uploading a PDF file from storage
 
+![](/media/upload.png)
+
+2. Previewing parsing results
+3. Copying parsing results
+
+![](/media/res.png)
+
+4. Loading parsing results into .csv, .xlsx, .json files
+
+![](/media/download.png)
+
+## Example of the parser's work
+
+Processing Tesla financial statements
+
+![](/media/demo.gif)

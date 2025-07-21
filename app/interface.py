@@ -73,7 +73,7 @@ def parse_pdf(file):
 def create_interface(title: str = "gradio app"):
     interface = gr.Blocks(title=title)
     with interface:
-        gr.Markdown("# Parsing IFRS financial statements from PDF using mistralAI LLM")
+        gr.Markdown("# Parsing IFRS financial statements from PDF using LLM")
         pdf_input = gr.File(label="Upload PDF file", file_types=[".pdf",], height=160, )
         process_btn = gr.Button(value="Parse pdf data", visible=False, variant="primary")
         parsed_reports = gr.DataFrame(label="Parsed financial statements", 
