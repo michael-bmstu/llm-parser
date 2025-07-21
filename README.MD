@@ -64,6 +64,7 @@ These IFRS indicators provide valuable insights into a company's financial perfo
 3. Run application (run in project directory)
     - FastAPI: `fastapi run main.py`
     - Uvicorn: `uvicorn main:app`
+4. Open Web-Interface at http://0.0.0.0:8000
 
 
 ## Implemented functionality
