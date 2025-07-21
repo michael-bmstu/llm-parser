@@ -15,7 +15,7 @@ def setup_logger(level=logging.DEBUG) -> logging.Logger:
     logger.setLevel(level)
 
     # Create a file handler
-    file_handler = logging.FileHandler(log_file, mode="w")
+    file_handler = logging.FileHandler(log_file, mode="w+")
     file_handler.setLevel(level)
 
     # Create a console handler

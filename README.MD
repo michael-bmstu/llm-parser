@@ -65,4 +65,5 @@ These IFRS indicators provide valuable insights into a company's financial perfo
 
 ## Application operation example
 
-///
+Processing tesla financial statements
+
