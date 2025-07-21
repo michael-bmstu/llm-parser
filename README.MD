@@ -1,5 +1,5 @@
-# LLM IFRS financial statements parser
-The annual IFRS financial statements of issuers differs from each other in format, therefore, for the convenience of extracting key indicators, a special parser is required.
+# LLM IFRS financial reporting parser
+The annual IFRS financial reporting of issuers differs from each other in format, therefore, for the convenience of extracting key indicators, a special parser is required.
 
 ## Project struct
 - `main.py` : FastAPI application run file
@@ -8,7 +8,7 @@ The annual IFRS financial statements of issuers differs from each other in forma
     - `models.py` : Pydantic models for PydanticOutputParser
     - `logger.py` : creating logger
     - `interface.py` : Gradio interface
-- **`data`** : examples of IFRS financial reporting
+- **`data`** : examples of IFRS financial financial reporting
 - **`media`** : photo and video files for readme
 - `requirements.txt` : python requirements
 
@@ -82,6 +82,6 @@ These IFRS indicators provide valuable insights into a company's financial perfo
 
 ## Example of the parser's work
 
-Processing Tesla financial statements
+Processing Tesla financial reporting
 
 ![](/media/demo.gif)
