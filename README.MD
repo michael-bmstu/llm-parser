@@ -2,7 +2,6 @@
 The annual IFRS financial statements of issuers differs from each other in format, therefore, for the convenience of extracting key indicators, a special parser is required.
 
 ## Project struct
-- `research.ipynb` : testing pdf parsing functional
 - `main.py` : FastAPI application run file
 - **`app`** : Application's modules
     - `utils.py` : Parsing functions
@@ -10,8 +9,8 @@ The annual IFRS financial statements of issuers differs from each other in forma
     - `logger.py` : creating logger
     - `interface.py` : Gradio interface
 - **`data`** : examples of IFRS financial reporting
-- **`media`**
-- `requirements.txt`
+- **`media`** : photo and video files for readme
+- `requirements.txt` : python requirements
 
 <details>
 <summary style="font-size: 20px;"><b>Key Indicators of IFRS financial reporting that will be parsed</b></summary>
